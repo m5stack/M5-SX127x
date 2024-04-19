@@ -1,12 +1,13 @@
 /*
-  LoRa Duplex communication
+  LoRa Duplex communication wth callback
 
-  Sends a message every half second, and polls continually
+  Sends a message every half second, and uses callback
   for new incoming messages. Implements a one-byte addressing scheme,
   with 0xFF as the broadcast address.
 
-  Uses readString() from Stream class to read payload. The Stream class'
-  timeout may affect other functuons, like the radio's callback. For an
+  Note: while sending, LoRa radio is not listening for incoming messages.
+  Note2: when using the callback method, you can't use any of the Stream
+  functions that rely on the timeout, such as readString, parseInt(), etc.
 
   created 28 April 2017
   by Tom Igoe
@@ -42,7 +43,7 @@ void onReceive(int packetSize);
 void setup() {
     Serial.begin(115200);  // initialize serial
 
-    Serial.println("LoRa Duplex");
+    Serial.println("LoRa Duplex with callback");
     SPI.begin(LORA_SCLK, LORA_MISO, LORA_MOSI, -1);  // SCK, MISO, MOSI, SS
     LoRa.setSPI(&SPI);
     LoRa.setPins(CS_PIN, RST_PIN, IRQ_PIN);  // set CS, reset, IRQ pin
@@ -55,6 +56,8 @@ void setup() {
     LoRa.setSignalBandwidth(LORA_BW);
     LoRa.setSpreadingFactor(LORA_SF);
 
+    LoRa.onReceive(onReceive);
+    LoRa.receive();
     Serial.println("LoRa init succeeded.");
 }
 
@@ -65,10 +68,8 @@ void loop() {
         Serial.println("Sending " + message);
         lastSendTime = millis();             // timestamp the message
         interval     = random(2000) + 1000;  // 2-3 seconds
+        LoRa.receive();                      // go back into receive mode
     }
-
-    // parse for a packet, and call onReceive with the result:
-    onReceive(LoRa.parsePacket());
 }
 
 void sendMessage(String outgoing) {
@@ -91,10 +92,10 @@ void onReceive(int packetSize) {
     byte incomingMsgId  = LoRa.read();  // incoming msg ID
     byte incomingLength = LoRa.read();  // incoming msg length
 
-    String incoming = "";
+    String incoming = "";  // payload of packet
 
-    while (LoRa.available()) {
-        incoming += (char)LoRa.read();
+    while (LoRa.available()) {  // can't use readString() in callback, so
+        incoming += (char)LoRa.read();  // add bytes one by one
     }
 
     if (incomingLength != incoming.length()) {  // check length for error

@@ -1,17 +1,17 @@
 {
-  "name": "M5-LoRa",
-  "description": "LoRa Module Driver",
-  "keywords": "M5Stack LoRa",
+  "name": "M5-SX127x",
+  "description": "SX127x LoRa Module Driver",
+  "keywords": "M5Stack SX127x LoRa",
   "authors": {
     "name": "M5Stack",
     "url": "http://www.m5stack.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/m5stack/M5-LoRa.git"
+    "url": "https://github.com/m5stack/M5-SX127x.git"
   },
   "version": "1.0.0",
   "frameworks": "arduino",
   "platforms": "espressif32",
-  "headers": "M5_LoRa.h"
+  "headers": "M5_SX127X.h"
 }
