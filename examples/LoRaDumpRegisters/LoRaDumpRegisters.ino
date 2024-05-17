@@ -17,6 +17,7 @@
 #define LORA_SCLK 18
 
 // LoRa Parameters Config
+// #define LORA_FREQ     433E6
 #define LORA_FREQ     868E6
 #define LORA_SF       12
 #define LORA_BW       125E3
