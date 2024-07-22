@@ -1,4 +1,10 @@
 /*
+ * SPDX-FileCopyrightText: 2024 M5Stack Technology CO LTD
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+/*
   LoRa register dump
 
   This examples shows how to inspect and output the LoRa radio's

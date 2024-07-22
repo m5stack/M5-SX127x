@@ -1,4 +1,10 @@
 /*
+ * SPDX-FileCopyrightText: 2024 M5Stack Technology CO LTD
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+/*
   LoRa Simple Gateway/Node Exemple
 
   This code uses InvertIQ function to create a simple Gateway/Node logic.

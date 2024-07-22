@@ -1,4 +1,10 @@
 /*
+ * SPDX-FileCopyrightText: 2024 M5Stack Technology CO LTD
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+/*
   LoRa Duplex communication wth callback
 
   Sends a message every half second, and uses callback

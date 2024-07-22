@@ -1,4 +1,10 @@
 /*
+ * SPDX-FileCopyrightText: 2024 M5Stack Technology CO LTD
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+/*
   LoRa Duplex communication with Sync Word
 
   Sends a message every half second, and polls continually
